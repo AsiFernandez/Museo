@@ -4,11 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DateFormatter;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -28,6 +29,9 @@ public class EntradaGratuita extends JFrame {
 	private JTextField tfPrecioEntrada;
 	private JTextField tfDireccion;
 	private JTextField tfNombreMuseo;
+	private JTextField tfFecha;
+	private JTextField tfCif;
+	
 
 	/**
 	 * Launch the application.
@@ -57,21 +61,94 @@ public class EntradaGratuita extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		/*
+		 * Todos Los TextField que hay
+		 */
+		tfNombreMuseo = new JTextField();
+		tfNombreMuseo.setText("Museo Diocesano");
+		tfNombreMuseo.setColumns(10);
+		tfNombreMuseo.setBounds(233, 83, 145, 25);
+		contentPane.add(tfNombreMuseo);
+		
+		tfDireccion = new JTextField();
+		tfDireccion.setColumns(10);
+		tfDireccion.setBounds(233, 119, 145, 25);
+		contentPane.add(tfDireccion);
+		
+		tfTipoEntrada = new JTextField();
+		tfTipoEntrada.setBounds(233, 153, 145, 25);
+		contentPane.add(tfTipoEntrada);
+		tfTipoEntrada.setColumns(10);
+		
+		tfPrecioEntrada = new JTextField();
+		tfPrecioEntrada.setColumns(10);
+		tfPrecioEntrada.setBounds(233, 191, 145, 25);
+		contentPane.add(tfPrecioEntrada);
+		
+		tfIva = new JTextField();
+		tfIva.setColumns(10);
+		tfIva.setBounds(233, 227, 145, 25);
+		contentPane.add(tfIva);
+		
+		tfFecha = new JTextField();
+		Date now = new Date();
+	    //Set date format as you want
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy"); 
+	    this.tfFecha.setText(sdf.format(now));
+		tfFecha.setBounds(233, 267, 145, 25);
+		contentPane.add(tfFecha);
+		tfFecha.setColumns(10);
+		
+		tfHora = new JTextField();
+		tfHora.setColumns(10);
+		tfHora.setBounds(233, 302, 145, 25);
+		contentPane.add(tfHora);
+		
+		JSpinner spCantidad = new JSpinner();
+		spCantidad.setBounds(233, 338, 145, 25);
+		contentPane.add(spCantidad);
+			
+		tfCif = new JTextField();
+		tfCif.setColumns(10);
+		tfCif.setBounds(233, 374, 145, 25);
+		contentPane.add(tfCif);
+		
+		/*
+		 * Todos losJlabel Que hay 
+		 * 
+		 */
+		
 		JLabel lbTitulo = new JLabel("Entrada Gratuita");
 		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lbTitulo.setBounds(10, 11, 466, 25);
 		contentPane.add(lbTitulo);
 		
-		JLabel lblTipoDeEntrada = new JLabel("Tipo de Entrada: ");
-		lblTipoDeEntrada.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblTipoDeEntrada.setBounds(37, 153, 145, 25);
-		contentPane.add(lblTipoDeEntrada);
+		JLabel lbNombreMuseo = new JLabel("Nombre del Museo: ");
+		lbNombreMuseo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbNombreMuseo.setBounds(37, 81, 157, 25);
+		contentPane.add(lbNombreMuseo);
 		
-		tfTipoEntrada = new JTextField();
-		tfTipoEntrada.setBounds(233, 153, 145, 25);
-		contentPane.add(tfTipoEntrada);
-		tfTipoEntrada.setColumns(10);
+		JLabel lbDireccion = new JLabel("Direccion: ");
+		lbDireccion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbDireccion.setBounds(37, 117, 145, 25);
+		contentPane.add(lbDireccion);
+		
+		JLabel lbTipoDeEntrada = new JLabel("Tipo de Entrada: ");
+		lbTipoDeEntrada.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbTipoDeEntrada.setBounds(37, 153, 145, 25);
+		contentPane.add(lbTipoDeEntrada);
+		
+		JLabel lbPrecio = new JLabel("Precio Entrada: ");
+		lbPrecio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbPrecio.setBounds(37, 189, 145, 25);
+		contentPane.add(lbPrecio);
+		
+		JLabel lbIva = new JLabel("Iva: ");
+		lbIva.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbIva.setBounds(37, 227, 145, 25);
+		contentPane.add(lbIva);
 		
 		JLabel lbFecha = new JLabel("Fecha:");
 		lbFecha.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -83,36 +160,19 @@ public class EntradaGratuita extends JFrame {
 		lbHora.setBounds(37, 299, 145, 25);
 		contentPane.add(lbHora);
 		
-		tfHora = new JTextField();
-		tfHora.setColumns(10);
-		tfHora.setBounds(233, 302, 145, 25);
-		contentPane.add(tfHora);
-		
 		JLabel lbCantidad = new JLabel("Cantidad");
 		lbCantidad.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbCantidad.setBounds(37, 338, 145, 25);
 		contentPane.add(lbCantidad);
 		
-		JSpinner spCantidad = new JSpinner();
-		spCantidad.setBounds(233, 338, 145, 25);
-		contentPane.add(spCantidad);
+		JLabel lbCif = new JLabel("Cif:");
+		lbCif.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbCif.setBounds(37, 374, 145, 25);
+		contentPane.add(lbCif);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tfTipoEntrada.setText("");
-				
-				tfHora.setText("");
-				spCantidad.setValue(Integer.valueOf(0));
-				SeleccionEntrada seleccionEntrada = new SeleccionEntrada();
-				seleccionEntrada.setVisible(true);  
-				dispose();
-				
-			}
-		});
-		btnCancelar.setBounds(10, 456, 89, 32);
-		contentPane.add(btnCancelar);
-				
+		/*
+		 * Botones De Aceptar Y Cancelar con sus funcionalidades
+		 */
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -123,66 +183,20 @@ public class EntradaGratuita extends JFrame {
 		});
 		btnConfirmar.setBounds(335, 456, 107, 32);
 		contentPane.add(btnConfirmar);
+		//Fin boton Confirmar
 		
-		JFormattedTextField ftfFecha = new JFormattedTextField();
-		ftfFecha.setBounds(233, 263, 145, 25);
-		contentPane.add(ftfFecha);
+		//Inicio boton Cancelar
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				spCantidad.setValue(Integer.valueOf(0));
+				SeleccionEntrada seleccionEntrada = new SeleccionEntrada();
+				seleccionEntrada.setVisible(true);  
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(10, 456, 89, 32);
+		contentPane.add(btnCancelar);	
 		
-		JLabel lbIva = new JLabel("Iva: ");
-		lbIva.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbIva.setBounds(37, 227, 145, 25);
-		contentPane.add(lbIva);
-		
-		tfIva = new JTextField();
-		tfIva.setColumns(10);
-		tfIva.setBounds(233, 227, 145, 25);
-		contentPane.add(tfIva);
-		
-		JLabel lbCif = new JLabel("Cif:");
-		lbCif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCif.setBounds(37, 374, 145, 25);
-		contentPane.add(lbCif);
-		
-		JLabel lbPrecio = new JLabel("Precio Entrada: ");
-		lbPrecio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbPrecio.setBounds(37, 189, 145, 25);
-		contentPane.add(lbPrecio);
-		
-		tfPrecioEntrada = new JTextField();
-		tfPrecioEntrada.setColumns(10);
-		tfPrecioEntrada.setBounds(233, 191, 145, 25);
-		contentPane.add(tfPrecioEntrada);
-		
-		JLabel lbNumCif = new JLabel("(FALTA NUMERO CIF)");
-		lbNumCif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbNumCif.setBounds(233, 374, 195, 25);
-		contentPane.add(lbNumCif);
-		
-		JLabel lbDireccion = new JLabel("Direccion: ");
-		lbDireccion.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbDireccion.setBounds(37, 117, 145, 25);
-		contentPane.add(lbDireccion);
-		
-		tfDireccion = new JTextField();
-		tfDireccion.setColumns(10);
-		tfDireccion.setBounds(233, 119, 145, 25);
-		contentPane.add(tfDireccion);
-		
-		JLabel lbNombreMuseo = new JLabel("Nombre del Museo: ");
-		lbNombreMuseo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbNombreMuseo.setBounds(37, 81, 157, 25);
-		contentPane.add(lbNombreMuseo);
-		
-		tfNombreMuseo = new JTextField();
-		tfNombreMuseo.setColumns(10);
-		tfNombreMuseo.setBounds(233, 83, 145, 25);
-		contentPane.add(tfNombreMuseo);
-		
-			
-			
-		
-
-		
-			
 	}
 }

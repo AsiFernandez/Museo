@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JFormattedTextField;
@@ -107,7 +108,7 @@ public class EntradaNormal extends JFrame {
 		lbCif.setBounds(30, 378, 145, 25);
 		contentPane.add(lbCif);
 		
-		JLabel lbNumCif = new JLabel("(FALTA NUMERO CIF)");
+		JLabel lbNumCif = new JLabel("R-2000199-F");
 		lbNumCif.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbNumCif.setBounds(226, 378, 195, 25);
 		contentPane.add(lbNumCif);
@@ -138,6 +139,7 @@ public class EntradaNormal extends JFrame {
 		contentPane.add(lbNombreMuseo);
 		
 		tfNombreMuseo = new JTextField();
+		tfNombreMuseo.setText("Museo Diocesano");
 		tfNombreMuseo.setColumns(10);
 		tfNombreMuseo.setBounds(226, 87, 145, 25);
 		contentPane.add(tfNombreMuseo);
