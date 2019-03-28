@@ -53,8 +53,6 @@ public class SeleccionEntrada extends JFrame {
 		
 		//Boton que te lleva a la pagina para las entradas gratuitas
 		JButton btnEntradaGratis = new JButton("Entrada Gratuita");
-		btnEntradaGratis.setBounds(64, 72, 130, 143);
-		contentPane.add(btnEntradaGratis);
 		btnEntradaGratis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EntradaGratuita entradagratuita = new EntradaGratuita();
@@ -62,9 +60,19 @@ public class SeleccionEntrada extends JFrame {
 				dispose();
 			}
 		});
+		btnEntradaGratis.setBounds(64, 72, 130, 143);
+		contentPane.add(btnEntradaGratis);
 		
 		
 		JButton btnEntradaNormal = new JButton("Entrada Normal");
+		btnEntradaNormal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EntradaNormal entradaNormal = new EntradaNormal();
+				entradaNormal.setVisible(true);
+				dispose();
+				
+			}
+		});
 		btnEntradaNormal.setBounds(221, 72, 130, 143);
 		contentPane.add(btnEntradaNormal);
 		
