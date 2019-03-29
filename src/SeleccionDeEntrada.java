@@ -14,7 +14,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-public class SeleccionEntrada extends JFrame {
+public class SeleccionDeEntrada extends JFrame {
 
 	private JPanel contentPane;
 
@@ -25,7 +25,7 @@ public class SeleccionEntrada extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeleccionEntrada frame = new SeleccionEntrada();
+					SeleccionDeEntrada frame = new SeleccionDeEntrada();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class SeleccionEntrada extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeleccionEntrada() {
+	public SeleccionDeEntrada() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 612, 309);
 		contentPane = new JPanel();
@@ -55,7 +55,7 @@ public class SeleccionEntrada extends JFrame {
 		JButton btnEntradaGratis = new JButton("Entrada Gratuita");
 		btnEntradaGratis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EntradaGratuita entradagratuita = new EntradaGratuita();
+				EntradasGratuitas entradagratuita = new EntradasGratuitas();
 				entradagratuita.setVisible(true);
 				dispose();
 			}
@@ -67,7 +67,7 @@ public class SeleccionEntrada extends JFrame {
 		JButton btnEntradaNormal = new JButton("Entrada Normal");
 		btnEntradaNormal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EntradaNormal entradaNormal = new EntradaNormal();
+				EntradasNormales entradaNormal = new EntradasNormales();
 				entradaNormal.setVisible(true);
 				dispose();
 				
@@ -78,6 +78,25 @@ public class SeleccionEntrada extends JFrame {
 		
 		JButton btnEntradaGrupos = new JButton("Entrada Grupos");
 		btnEntradaGrupos.setBounds(391, 72, 130, 143);
+		btnEntradaGrupos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EntradasGrupos entradasGrupos = new EntradasGrupos();
+				entradasGrupos.setVisible(true);
+				dispose();				
+			}
+		});
 		contentPane.add(btnEntradaGrupos);
+		
+		JButton btCerrarSesion = new JButton("Cerar Sesion");
+		btCerrarSesion.setBounds(440, 236, 146, 23);
+		btCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InicioSesion inicioSesion = new InicioSesion();
+				inicioSesion.setVisible(true);
+				dispose();
+			}
+		});
+		
+		contentPane.add(btCerrarSesion);
 	}
 }

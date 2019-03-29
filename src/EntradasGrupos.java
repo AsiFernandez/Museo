@@ -20,7 +20,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
-public class EntradaGratuita extends JFrame {
+public class EntradasGrupos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTipoEntrada;
@@ -40,7 +40,7 @@ public class EntradaGratuita extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntradaGratuita frame = new EntradaGratuita();
+					EntradasGrupos frame = new EntradasGrupos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class EntradaGratuita extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EntradaGratuita() {
+	public EntradasGrupos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 502, 538);
 		contentPane = new JPanel();
@@ -66,52 +66,68 @@ public class EntradaGratuita extends JFrame {
 		 * Todos Los TextField que hay
 		 */
 		tfNombreMuseo = new JTextField();
+		tfNombreMuseo.setHorizontalAlignment(SwingConstants.CENTER);
 		tfNombreMuseo.setText("Museo Diocesano");
 		tfNombreMuseo.setColumns(10);
-		tfNombreMuseo.setBounds(233, 83, 145, 25);
+		tfNombreMuseo.setBounds(233, 83, 243, 25);
 		contentPane.add(tfNombreMuseo);
 		
 		tfDireccion = new JTextField();
+		tfDireccion.setHorizontalAlignment(SwingConstants.CENTER);
+		tfDireccion.setText("31 de Agosto Kalea, 46, 20003 Donostia");
 		tfDireccion.setColumns(10);
-		tfDireccion.setBounds(233, 119, 145, 25);
+		tfDireccion.setBounds(233, 119, 243, 25);
 		contentPane.add(tfDireccion);
 		
 		tfTipoEntrada = new JTextField();
-		tfTipoEntrada.setBounds(233, 153, 145, 25);
+		tfTipoEntrada.setHorizontalAlignment(SwingConstants.CENTER);
+		tfTipoEntrada.setText("Grupos");
+		tfTipoEntrada.setBounds(233, 153, 243, 25);
 		contentPane.add(tfTipoEntrada);
 		tfTipoEntrada.setColumns(10);
 		
 		tfPrecioEntrada = new JTextField();
+		tfPrecioEntrada.setHorizontalAlignment(SwingConstants.CENTER);
+		tfPrecioEntrada.setText("0€");
 		tfPrecioEntrada.setColumns(10);
-		tfPrecioEntrada.setBounds(233, 191, 145, 25);
+		tfPrecioEntrada.setBounds(233, 191, 243, 25);
 		contentPane.add(tfPrecioEntrada);
 		
 		tfIva = new JTextField();
+		tfIva.setHorizontalAlignment(SwingConstants.CENTER);
 		tfIva.setColumns(10);
-		tfIva.setBounds(233, 227, 145, 25);
+		tfIva.setBounds(233, 227, 243, 25);
 		contentPane.add(tfIva);
 		
 		tfFecha = new JTextField();
+		tfFecha.setHorizontalAlignment(SwingConstants.CENTER);
 		Date now = new Date();
 	    //Set date format as you want
-	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy"); 
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd"); 
 	    this.tfFecha.setText(sdf.format(now));
-		tfFecha.setBounds(233, 267, 145, 25);
+		tfFecha.setBounds(233, 267, 243, 25);
 		contentPane.add(tfFecha);
 		tfFecha.setColumns(10);
 		
 		tfHora = new JTextField();
+		tfHora.setHorizontalAlignment(SwingConstants.CENTER);
+		Date now2 = new Date();
+	    //Set date format as you want
+	    SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss"); 
+	    this.tfHora.setText(stf.format(now2));
 		tfHora.setColumns(10);
-		tfHora.setBounds(233, 302, 145, 25);
+		tfHora.setBounds(233, 302, 243, 25);
 		contentPane.add(tfHora);
 		
 		JSpinner spCantidad = new JSpinner();
-		spCantidad.setBounds(233, 338, 145, 25);
+		spCantidad.setBounds(233, 338, 243, 25);
 		contentPane.add(spCantidad);
 			
 		tfCif = new JTextField();
+		tfCif.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCif.setText("R-2000199-F");
 		tfCif.setColumns(10);
-		tfCif.setBounds(233, 374, 145, 25);
+		tfCif.setBounds(233, 374, 243, 25);
 		contentPane.add(tfCif);
 		
 		/*
@@ -119,13 +135,13 @@ public class EntradaGratuita extends JFrame {
 		 * 
 		 */
 		
-		JLabel lbTitulo = new JLabel("Entrada Gratuita");
+		JLabel lbTitulo = new JLabel("Entrada Grupos");
 		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lbTitulo.setBounds(10, 11, 466, 25);
 		contentPane.add(lbTitulo);
 		
-		JLabel lbNombreMuseo = new JLabel("Nombre del Museo: ");
+		JLabel lbNombreMuseo = new JLabel("Museo Diocesano");
 		lbNombreMuseo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbNombreMuseo.setBounds(37, 81, 157, 25);
 		contentPane.add(lbNombreMuseo);
@@ -190,7 +206,7 @@ public class EntradaGratuita extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				spCantidad.setValue(Integer.valueOf(0));
-				SeleccionEntrada seleccionEntrada = new SeleccionEntrada();
+				SeleccionDeEntrada seleccionEntrada = new SeleccionDeEntrada();
 				seleccionEntrada.setVisible(true);  
 				dispose();
 			}

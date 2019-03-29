@@ -22,7 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
 
-public class InicioDeSesion extends JFrame {
+public class InicioSesion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfUsuario;
@@ -35,7 +35,7 @@ public class InicioDeSesion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InicioDeSesion frame = new InicioDeSesion();
+					InicioSesion frame = new InicioSesion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class InicioDeSesion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InicioDeSesion() {
+	public InicioSesion() {
 		Driver();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,7 +109,7 @@ public class InicioDeSesion extends JFrame {
 				
 				boolean existe = rs.next();
 				if(existe) {
-					SeleccionEntrada SeleccionarEntrada = new SeleccionEntrada();
+					SeleccionDeEntrada SeleccionarEntrada = new SeleccionDeEntrada();
 					SeleccionarEntrada.setVisible(true);
 					dispose();
 				}else {
