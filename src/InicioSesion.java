@@ -100,9 +100,10 @@ public class InicioSesion extends JFrame {
 			String usuario = tfUsuario.getText();
 			char[] cContrasenia = pfContrasenia.getPassword();
 			String sContrasenia = String.valueOf(cContrasenia);
-			String query = "Select * from usuarios where nombre = '" + usuario + "' and contrasenia = '" + sContrasenia + "'"; 
+			 
 			
 			try {
+				String query = "Select * from usuarios where nombre = '" + usuario + "' and contrasenia = '" + sContrasenia + "'";
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/museo", "root", "root");
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery(query);

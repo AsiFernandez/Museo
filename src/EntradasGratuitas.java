@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +28,6 @@ public class EntradasGratuitas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTipoEntrada;
-	private JTextField tfHora;
 	private JTextField tfIva;
 	private JTextField tfPrecioEntrada;
 	private JTextField tfDireccion;
@@ -88,7 +91,7 @@ public class EntradasGratuitas extends JFrame {
 		
 		tfPrecioEntrada = new JTextField();
 		tfPrecioEntrada.setHorizontalAlignment(SwingConstants.CENTER);
-		tfPrecioEntrada.setText("0€");
+		tfPrecioEntrada.setText("0");
 		tfPrecioEntrada.setColumns(10);
 		tfPrecioEntrada.setBounds(233, 191, 243, 25);
 		contentPane.add(tfPrecioEntrada);
@@ -103,31 +106,22 @@ public class EntradasGratuitas extends JFrame {
 		tfFecha.setHorizontalAlignment(SwingConstants.CENTER);
 		Date now = new Date();
 	    //Set date format as you want
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd"); 
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
 	    this.tfFecha.setText(sdf.format(now));
 		tfFecha.setBounds(233, 267, 243, 25);
 		contentPane.add(tfFecha);
 		tfFecha.setColumns(10);
 		
-		tfHora = new JTextField();
-		tfHora.setHorizontalAlignment(SwingConstants.CENTER);
-		Date now2 = new Date();
-	    //Set date format as you want
-	    SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss"); 
-	    this.tfHora.setText(stf.format(now2));
-		tfHora.setColumns(10);
-		tfHora.setBounds(233, 302, 243, 25);
-		contentPane.add(tfHora);
 		
 		JSpinner spCantidad = new JSpinner();
-		spCantidad.setBounds(233, 338, 243, 25);
+		spCantidad.setBounds(233, 303, 243, 25);
 		contentPane.add(spCantidad);
 			
 		tfCif = new JTextField();
 		tfCif.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCif.setText("R-2000199-F");
 		tfCif.setColumns(10);
-		tfCif.setBounds(233, 374, 243, 25);
+		tfCif.setBounds(233, 339, 243, 25);
 		contentPane.add(tfCif);
 		
 		/*
@@ -171,19 +165,14 @@ public class EntradasGratuitas extends JFrame {
 		lbFecha.setBounds(37, 263, 145, 25);
 		contentPane.add(lbFecha);
 		
-		JLabel lbHora = new JLabel("Hora ");
-		lbHora.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbHora.setBounds(37, 299, 145, 25);
-		contentPane.add(lbHora);
-		
 		JLabel lbCantidad = new JLabel("Cantidad");
 		lbCantidad.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCantidad.setBounds(37, 338, 145, 25);
+		lbCantidad.setBounds(37, 303, 145, 25);
 		contentPane.add(lbCantidad);
 		
 		JLabel lbCif = new JLabel("Cif:");
 		lbCif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCif.setBounds(37, 374, 145, 25);
+		lbCif.setBounds(37, 339, 145, 25);
 		contentPane.add(lbCif);
 		
 		/*
@@ -192,12 +181,42 @@ public class EntradasGratuitas extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			String museo = tfNombreMuseo.getText();
+			String direccion = tfDireccion.getText();
 			String tEntrada = tfTipoEntrada.getText();
+			Double precioEntrada = Double.parseDouble(tfPrecioEntrada.getText());
+			Double iva = Double.parseDouble(tfIva.getText());
+			//leer date de JTextField
+			String startDate = tfFecha.getText().toString();
+			//Deja de leer la fecha
+			int cantidad = (Integer) spCantidad.getValue();
+			String cif = tfCif.getText();
 			
+			try {
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/museo","root" , "root");			
+				String query = " insert into entradas (nombreMuseo, direccion, tipo, precio, iva, fecha, cantidad, cif)"
+				        + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+
+				      // create the mysql insert preparedstatement
+				      PreparedStatement preparedSt = con.prepareStatement(query);
+				      preparedSt.setString (1, museo);
+				      preparedSt.setString (2, direccion);
+				      preparedSt.setString (3, tEntrada);
+				      preparedSt.setDouble (4, precioEntrada);
+				      preparedSt.setDouble (5, iva);
+				      preparedSt.setString (6, startDate);
+				      preparedSt.setInt (7, cantidad);
+				      preparedSt.setString (8, cif );
+
+				      // execute the preparedstatement
+				      preparedSt.execute();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 				 
 			}
 		});
-		btnConfirmar.setBounds(335, 456, 107, 32);
+		btnConfirmar.setBounds(369, 385, 107, 32);
 		contentPane.add(btnConfirmar);
 		//Fin boton Confirmar
 		
@@ -211,7 +230,7 @@ public class EntradasGratuitas extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(10, 456, 89, 32);
+		btnCancelar.setBounds(10, 385, 89, 32);
 		contentPane.add(btnCancelar);	
 		
 	}
