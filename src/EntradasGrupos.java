@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -192,8 +196,38 @@ public class EntradasGrupos extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			String museo = tfNombreMuseo.getText();
+			String direccion = tfDireccion.getText();
 			String tEntrada = tfTipoEntrada.getText();
+			Double precioEntrada = Double.parseDouble(tfPrecioEntrada.getText());
+			Double iva = Double.parseDouble(tfIva.getText());
+			//leer date de JTextField
+			String startDate = tfFecha.getText().toString();
+			//Deja de leer la fecha
+			int cantidad = (Integer) spCantidad.getValue();
+			String cif = tfCif.getText();
 			
+			try {
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/museo","root" , "root");			
+				String query = " insert into entradas (nombreMuseo, direccion, tipo, precio, iva, fecha, cantidad, cif)"
+				        + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+
+				      // create the mysql insert preparedstatement
+				      PreparedStatement preparedSt = con.prepareStatement(query);
+				      preparedSt.setString (1, museo);
+				      preparedSt.setString (2, direccion);
+				      preparedSt.setString (3, tEntrada);
+				      preparedSt.setDouble (4, precioEntrada);
+				      preparedSt.setDouble (5, iva);
+				      preparedSt.setString (6, startDate);
+				      preparedSt.setInt (7, cantidad);
+				      preparedSt.setString (8, cif );
+
+				      // execute the preparedstatement
+				      preparedSt.execute();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 				 
 			}
 		});
