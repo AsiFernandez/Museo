@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 
 public class ConfirmacionEntrada extends JFrame {
 
@@ -47,7 +48,7 @@ public class ConfirmacionEntrada extends JFrame {
 		JLabel lblNewLabel = new JLabel("Informacion de la entrada");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 664, 25);
+		lblNewLabel.setBounds(10, 10, 674, 25);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lbNombreMuseoR = new JLabel();

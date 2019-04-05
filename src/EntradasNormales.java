@@ -96,12 +96,12 @@ public class EntradasNormales extends JFrame {
 		
 		tfPrecioEntrada = new JTextField();
 		tfPrecioEntrada.setHorizontalAlignment(SwingConstants.CENTER);
-		tfPrecioEntrada.setText("3");
+		tfPrecioEntrada.setText("2,48");
 		tfPrecioEntrada.setColumns(10);
 		tfPrecioEntrada.setBounds(233, 191, 243, 25);
 		contentPane.add(tfPrecioEntrada);
 		
-		tfIva = new JTextField();
+		tfIva = new JTextField("0,52");
 		tfIva.setHorizontalAlignment(SwingConstants.CENTER);
 		tfIva.setColumns(10);
 		tfIva.setBounds(233, 227, 243, 25);
@@ -120,9 +120,9 @@ public class EntradasNormales extends JFrame {
 	    //Set date format as you want
 	    SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
 		
-		JSpinner spCantidad = new JSpinner();
-		spCantidad.setBounds(233, 303, 243, 25);
-		contentPane.add(spCantidad);
+		JTextField tfCantidad = new JTextField();
+		tfCantidad.setBounds(233, 303, 243, 25);
+		contentPane.add(tfCantidad);
 			
 		tfCif = new JTextField();
 		tfCif.setHorizontalAlignment(SwingConstants.CENTER);
@@ -147,7 +147,7 @@ public class EntradasNormales extends JFrame {
 		lbNombreMuseo.setBounds(37, 81, 157, 25);
 		contentPane.add(lbNombreMuseo);
 		
-		JLabel lbDireccion = new JLabel("" + tfDireccion.getText() + "");
+		JLabel lbDireccion = new JLabel("Direccion");
 		lbDireccion.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbDireccion.setBounds(37, 117, 145, 25);
 		contentPane.add(lbDireccion);
@@ -196,7 +196,7 @@ public class EntradasNormales extends JFrame {
 			//leer date de JTextField
 			String startDate = tfFecha.getText().toString();
 			//Deja de leer la fecha
-			int cantidad = (Integer) spCantidad.getValue();
+			String cantidad = tfCantidad.getText();
 			String cif = tfCif.getText();
 			
 			try {
@@ -212,15 +212,16 @@ public class EntradasNormales extends JFrame {
 				      preparedSt.setDouble (4, precioEntrada);
 				      preparedSt.setDouble (5, iva);
 				      preparedSt.setString (6, startDate);
-				      preparedSt.setInt (7, cantidad);
+				      preparedSt.setString (7, cantidad);
 				      preparedSt.setString (8, cif );
 
 				      // execute the preparedstatement
 				      preparedSt.execute();
+				      
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-				 
+			
 			}
 		});
 		btnConfirmar.setBounds(335, 386, 107, 32);
@@ -231,7 +232,6 @@ public class EntradasNormales extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				spCantidad.setValue(Integer.valueOf(0));
 				SeleccionDeEntrada seleccionEntrada = new SeleccionDeEntrada();
 				seleccionEntrada.setVisible(true);  
 				dispose();

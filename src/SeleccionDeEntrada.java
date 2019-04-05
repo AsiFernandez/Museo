@@ -39,7 +39,7 @@ public class SeleccionDeEntrada extends JFrame {
 	 */
 	public SeleccionDeEntrada() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 612, 309);
+		setBounds(100, 100, 765, 332);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -88,7 +88,7 @@ public class SeleccionDeEntrada extends JFrame {
 		contentPane.add(btnEntradaGrupos);
 		
 		JButton btCerrarSesion = new JButton("Cerar Sesion");
-		btCerrarSesion.setBounds(440, 236, 146, 23);
+		btCerrarSesion.setBounds(543, 240, 170, 42);
 		btCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InicioSesion inicioSesion = new InicioSesion();
@@ -96,7 +96,21 @@ public class SeleccionDeEntrada extends JFrame {
 				dispose();
 			}
 		});
-		
 		contentPane.add(btCerrarSesion);
+		
+		
+		JButton btOtros = new JButton("Otros Eventos");
+		btOtros.setBounds(555, 72, 130, 143);
+		btOtros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+				OtrosEventos otrosEventos = new OtrosEventos();
+				otrosEventos.setVisible(true);
+				dispose();
+				
+			}
+			
+		});
+		contentPane.add(btOtros);
 	}
 }

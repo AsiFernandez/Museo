@@ -5,16 +5,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DateFormatter;
+
+import java.sql.Connection;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.SwingConstants;
@@ -24,7 +29,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
-public class EntradasGrupos extends JFrame {
+public class OtrosEventos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTipoEntrada;
@@ -43,7 +48,7 @@ public class EntradasGrupos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntradasGrupos frame = new EntradasGrupos();
+					OtrosEventos frame = new OtrosEventos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,9 +60,9 @@ public class EntradasGrupos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EntradasGrupos() {
+	public OtrosEventos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 832, 510);
+		setBounds(100, 100, 831, 498);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,35 +77,34 @@ public class EntradasGrupos extends JFrame {
 		tfNombreMuseo.setHorizontalAlignment(SwingConstants.CENTER);
 		tfNombreMuseo.setText("Museo Diocesano");
 		tfNombreMuseo.setColumns(10);
-		tfNombreMuseo.setBounds(408, 79, 289, 25);
+		tfNombreMuseo.setBounds(378, 67, 371, 25);
 		contentPane.add(tfNombreMuseo);
 		
 		tfDireccion = new JTextField();
 		tfDireccion.setHorizontalAlignment(SwingConstants.CENTER);
 		tfDireccion.setText("31 de Agosto Kalea, 46, 20003 Donostia");
 		tfDireccion.setColumns(10);
-		tfDireccion.setBounds(408, 115, 289, 25);
+		tfDireccion.setBounds(378, 103, 371, 25);
 		contentPane.add(tfDireccion);
 		
 		tfTipoEntrada = new JTextField();
 		tfTipoEntrada.setHorizontalAlignment(SwingConstants.CENTER);
-		tfTipoEntrada.setText("Grupos");
-		tfTipoEntrada.setBounds(408, 149, 289, 25);
+		tfTipoEntrada.setText("Normal");
+		tfTipoEntrada.setBounds(378, 137, 371, 25);
 		contentPane.add(tfTipoEntrada);
 		tfTipoEntrada.setColumns(10);
 		
 		tfPrecioEntrada = new JTextField();
 		tfPrecioEntrada.setHorizontalAlignment(SwingConstants.CENTER);
-		tfPrecioEntrada.setText("0");
+		tfPrecioEntrada.setText("2,48");
 		tfPrecioEntrada.setColumns(10);
-		tfPrecioEntrada.setBounds(408, 187, 289, 25);
+		tfPrecioEntrada.setBounds(378, 175, 371, 25);
 		contentPane.add(tfPrecioEntrada);
 		
-		tfIva = new JTextField();
+		tfIva = new JTextField("0,52");
 		tfIva.setHorizontalAlignment(SwingConstants.CENTER);
-		tfIva.setText("0");
 		tfIva.setColumns(10);
-		tfIva.setBounds(408, 223, 289, 25);
+		tfIva.setBounds(378, 211, 371, 25);
 		contentPane.add(tfIva);
 		
 		tfFecha = new JTextField();
@@ -109,20 +113,22 @@ public class EntradasGrupos extends JFrame {
 	    //Set date format as you want
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
 	    this.tfFecha.setText(sdf.format(now));
-		tfFecha.setBounds(408, 263, 289, 25);
+		tfFecha.setBounds(378, 251, 371, 25);
 		contentPane.add(tfFecha);
 		tfFecha.setColumns(10);
-		
+		Date now2 = new Date();
+	    //Set date format as you want
+	    SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
 		
 		JTextField tfCantidad = new JTextField();
-		tfCantidad.setBounds(408, 299, 289, 25);
+		tfCantidad.setBounds(378, 287, 371, 25);
 		contentPane.add(tfCantidad);
 			
 		tfCif = new JTextField();
 		tfCif.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCif.setText("R-2000199-F");
 		tfCif.setColumns(10);
-		tfCif.setBounds(408, 335, 289, 25);
+		tfCif.setBounds(378, 323, 371, 25);
 		contentPane.add(tfCif);
 		
 		/*
@@ -130,50 +136,50 @@ public class EntradasGrupos extends JFrame {
 		 * 
 		 */
 		
-		JLabel lbTitulo = new JLabel("Entrada Grupos");
+		JLabel lbTitulo = new JLabel("Entrada Normal");
 		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lbTitulo.setBounds(10, 11, 466, 25);
+		lbTitulo.setBounds(10, 11, 795, 25);
 		contentPane.add(lbTitulo);
 		
-		JLabel lbNombreMuseo = new JLabel("Museo Diocesano");
-		lbNombreMuseo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbNombreMuseo.setBounds(157, 79, 157, 25);
-		contentPane.add(lbNombreMuseo);
+		JLabel lbEvento = new JLabel("Evento");
+		lbEvento.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbEvento.setBounds(131, 67, 157, 25);
+		contentPane.add(lbEvento);
 		
-		JLabel lbDireccion = new JLabel("Direccion: ");
+		JLabel lbDireccion = new JLabel("Direccion");
 		lbDireccion.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbDireccion.setBounds(157, 115, 145, 25);
+		lbDireccion.setBounds(131, 103, 145, 25);
 		contentPane.add(lbDireccion);
 		
 		JLabel lbTipoDeEntrada = new JLabel("Tipo de Entrada: ");
 		lbTipoDeEntrada.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbTipoDeEntrada.setBounds(157, 151, 145, 25);
+		lbTipoDeEntrada.setBounds(131, 139, 145, 25);
 		contentPane.add(lbTipoDeEntrada);
 		
 		JLabel lbPrecio = new JLabel("Precio Entrada: ");
 		lbPrecio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbPrecio.setBounds(157, 187, 145, 25);
+		lbPrecio.setBounds(131, 175, 145, 25);
 		contentPane.add(lbPrecio);
 		
 		JLabel lbIva = new JLabel("Iva: ");
 		lbIva.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbIva.setBounds(157, 225, 145, 25);
+		lbIva.setBounds(131, 213, 145, 25);
 		contentPane.add(lbIva);
 		
 		JLabel lbFecha = new JLabel("Fecha / Hora:");
 		lbFecha.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbFecha.setBounds(157, 261, 145, 25);
+		lbFecha.setBounds(131, 249, 145, 25);
 		contentPane.add(lbFecha);
 		
 		JLabel lbCantidad = new JLabel("Cantidad");
 		lbCantidad.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCantidad.setBounds(157, 301, 145, 25);
+		lbCantidad.setBounds(131, 289, 145, 25);
 		contentPane.add(lbCantidad);
 		
 		JLabel lbCif = new JLabel("Cif:");
 		lbCif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCif.setBounds(157, 337, 145, 25);
+		lbCif.setBounds(131, 325, 145, 25);
 		contentPane.add(lbCif);
 		
 		/*
@@ -211,13 +217,14 @@ public class EntradasGrupos extends JFrame {
 
 				      // execute the preparedstatement
 				      preparedSt.execute();
+				      
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-				 
+			
 			}
 		});
-		btnConfirmar.setBounds(684, 402, 122, 53);
+		btnConfirmar.setBounds(675, 386, 130, 51);
 		contentPane.add(btnConfirmar);
 		//Fin boton Confirmar
 		
@@ -230,7 +237,7 @@ public class EntradasGrupos extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(10, 402, 135, 53);
+		btnCancelar.setBounds(21, 386, 124, 51);
 		contentPane.add(btnCancelar);	
 		
 	}

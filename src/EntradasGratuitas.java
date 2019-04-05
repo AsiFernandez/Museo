@@ -34,6 +34,7 @@ public class EntradasGratuitas extends JFrame {
 	private JTextField tfNombreMuseo;
 	private JTextField tfFecha;
 	private JTextField tfCif;
+	private JTextField tfCantidad;
 	
 
 	/**
@@ -57,7 +58,7 @@ public class EntradasGratuitas extends JFrame {
 	 */
 	public EntradasGratuitas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 502, 538);
+		setBounds(100, 100, 836, 505);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,22 +71,22 @@ public class EntradasGratuitas extends JFrame {
 		 */
 		tfNombreMuseo = new JTextField();
 		tfNombreMuseo.setHorizontalAlignment(SwingConstants.CENTER);
-		tfNombreMuseo.setText("Museo Diocesano");
+		tfNombreMuseo.setText("D´Museoa Museo Diocesano");
 		tfNombreMuseo.setColumns(10);
-		tfNombreMuseo.setBounds(233, 83, 243, 25);
+		tfNombreMuseo.setBounds(303, 70, 390, 25);
 		contentPane.add(tfNombreMuseo);
 		
 		tfDireccion = new JTextField();
 		tfDireccion.setHorizontalAlignment(SwingConstants.CENTER);
 		tfDireccion.setText("31 de Agosto Kalea, 46, 20003 Donostia");
 		tfDireccion.setColumns(10);
-		tfDireccion.setBounds(233, 119, 243, 25);
+		tfDireccion.setBounds(303, 106, 390, 25);
 		contentPane.add(tfDireccion);
 		
 		tfTipoEntrada = new JTextField();
 		tfTipoEntrada.setHorizontalAlignment(SwingConstants.CENTER);
 		tfTipoEntrada.setText("Gratis");
-		tfTipoEntrada.setBounds(233, 153, 243, 25);
+		tfTipoEntrada.setBounds(303, 140, 390, 25);
 		contentPane.add(tfTipoEntrada);
 		tfTipoEntrada.setColumns(10);
 		
@@ -93,13 +94,14 @@ public class EntradasGratuitas extends JFrame {
 		tfPrecioEntrada.setHorizontalAlignment(SwingConstants.CENTER);
 		tfPrecioEntrada.setText("0");
 		tfPrecioEntrada.setColumns(10);
-		tfPrecioEntrada.setBounds(233, 191, 243, 25);
+		tfPrecioEntrada.setBounds(303, 178, 390, 25);
 		contentPane.add(tfPrecioEntrada);
 		
 		tfIva = new JTextField();
 		tfIva.setHorizontalAlignment(SwingConstants.CENTER);
+		tfIva.setText("0");
 		tfIva.setColumns(10);
-		tfIva.setBounds(233, 227, 243, 25);
+		tfIva.setBounds(303, 214, 390, 25);
 		contentPane.add(tfIva);
 		
 		tfFecha = new JTextField();
@@ -108,21 +110,22 @@ public class EntradasGratuitas extends JFrame {
 	    //Set date format as you want
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
 	    this.tfFecha.setText(sdf.format(now));
-		tfFecha.setBounds(233, 267, 243, 25);
+		tfFecha.setBounds(303, 254, 390, 25);
 		contentPane.add(tfFecha);
 		tfFecha.setColumns(10);
-		
-		
-		JSpinner spCantidad = new JSpinner();
-		spCantidad.setBounds(233, 303, 243, 25);
-		contentPane.add(spCantidad);
 			
 		tfCif = new JTextField();
 		tfCif.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCif.setText("R-2000199-F");
 		tfCif.setColumns(10);
-		tfCif.setBounds(233, 339, 243, 25);
+		tfCif.setBounds(303, 326, 390, 25);
 		contentPane.add(tfCif);
+		
+		tfCantidad = new JTextField();
+		tfCantidad.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCantidad.setColumns(10);
+		tfCantidad.setBounds(303, 290, 390, 25);
+		contentPane.add(tfCantidad);
 		
 		/*
 		 * Todos losJlabel Que hay 
@@ -137,42 +140,42 @@ public class EntradasGratuitas extends JFrame {
 		
 		JLabel lbNombreMuseo = new JLabel("Nombre del Museo: ");
 		lbNombreMuseo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbNombreMuseo.setBounds(37, 81, 157, 25);
+		lbNombreMuseo.setBounds(100, 68, 157, 25);
 		contentPane.add(lbNombreMuseo);
 		
 		JLabel lbDireccion = new JLabel("Direccion: ");
 		lbDireccion.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbDireccion.setBounds(37, 117, 145, 25);
+		lbDireccion.setBounds(100, 104, 145, 25);
 		contentPane.add(lbDireccion);
 		
 		JLabel lbTipoDeEntrada = new JLabel("Tipo de Entrada: ");
 		lbTipoDeEntrada.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbTipoDeEntrada.setBounds(37, 153, 145, 25);
+		lbTipoDeEntrada.setBounds(100, 140, 145, 25);
 		contentPane.add(lbTipoDeEntrada);
 		
 		JLabel lbPrecio = new JLabel("Precio Entrada: ");
 		lbPrecio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbPrecio.setBounds(37, 189, 145, 25);
+		lbPrecio.setBounds(100, 176, 145, 25);
 		contentPane.add(lbPrecio);
 		
 		JLabel lbIva = new JLabel("Iva: ");
 		lbIva.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbIva.setBounds(37, 227, 145, 25);
+		lbIva.setBounds(100, 214, 145, 25);
 		contentPane.add(lbIva);
 		
-		JLabel lbFecha = new JLabel("Fecha:");
+		JLabel lbFecha = new JLabel("Fecha / Hora:");
 		lbFecha.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbFecha.setBounds(37, 263, 145, 25);
+		lbFecha.setBounds(100, 250, 145, 25);
 		contentPane.add(lbFecha);
 		
 		JLabel lbCantidad = new JLabel("Cantidad");
 		lbCantidad.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCantidad.setBounds(37, 303, 145, 25);
+		lbCantidad.setBounds(100, 290, 145, 25);
 		contentPane.add(lbCantidad);
 		
 		JLabel lbCif = new JLabel("Cif:");
 		lbCif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbCif.setBounds(37, 339, 145, 25);
+		lbCif.setBounds(100, 326, 145, 25);
 		contentPane.add(lbCif);
 		
 		/*
@@ -189,7 +192,7 @@ public class EntradasGratuitas extends JFrame {
 			//leer date de JTextField
 			String startDate = tfFecha.getText().toString();
 			//Deja de leer la fecha
-			int cantidad = (Integer) spCantidad.getValue();
+			String cantidad =  tfCantidad.getText();
 			String cif = tfCif.getText();
 			
 			try {
@@ -205,7 +208,7 @@ public class EntradasGratuitas extends JFrame {
 				      preparedSt.setDouble (4, precioEntrada);
 				      preparedSt.setDouble (5, iva);
 				      preparedSt.setString (6, startDate);
-				      preparedSt.setInt (7, cantidad);
+				      preparedSt.setString (7, cantidad);
 				      preparedSt.setString (8, cif );
 
 				      // execute the preparedstatement
@@ -216,7 +219,7 @@ public class EntradasGratuitas extends JFrame {
 				 
 			}
 		});
-		btnConfirmar.setBounds(369, 385, 107, 32);
+		btnConfirmar.setBounds(665, 385, 145, 54);
 		contentPane.add(btnConfirmar);
 		//Fin boton Confirmar
 		
@@ -224,14 +227,15 @@ public class EntradasGratuitas extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				spCantidad.setValue(Integer.valueOf(0));
 				SeleccionDeEntrada seleccionEntrada = new SeleccionDeEntrada();
 				seleccionEntrada.setVisible(true);  
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(10, 385, 89, 32);
+		btnCancelar.setBounds(10, 385, 145, 54);
 		contentPane.add(btnCancelar);	
+		
+		
 		
 	}
 }
